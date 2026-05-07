@@ -1,0 +1,7 @@
+INFO:     Will watch for changes in these directories: ['C:\\Users\\bhanu\\Desktop\\Escrow_AI_backend']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [22204] using WatchFiles
+INFO:     Started server process [14892]
+INFO:     Waiting for application startup.
+2026-05-07 12:17:58,064 [INFO] db.database: [db] Initializing SQLite at C:\Users\bhanu\Desktop\Escrow_AI_backend\data\escrow.db
+INFO:     Application startup complete.

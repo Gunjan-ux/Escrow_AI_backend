@@ -4,7 +4,7 @@ from functools import lru_cache
 from agno.agent import Agent
 
 from agents.model import build_model
-from config import PROMPTS_DIR
+from config import AGENT_USE_BEDROCK, PROMPTS_DIR
 from schemas import ExtractedFields, Rule, RulesResponse
 
 logger = logging.getLogger(__name__)
@@ -18,12 +18,14 @@ def _system_prompt() -> str:
 @lru_cache(maxsize=1)
 def _agent() -> Agent:
     logger.info("[rule_generator] Initializing rule-generation agent.")
-    return Agent(
+    kwargs = dict(
         model=build_model(),
         description=_system_prompt(),
-        output_schema=RulesResponse,
         use_json_mode=True,
     )
+    if not AGENT_USE_BEDROCK:
+        kwargs["output_schema"] = RulesResponse
+    return Agent(**kwargs)
 
 
 def _build_user_message(fields: ExtractedFields, raw_text: str) -> str:

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem C:\\\\Users\\\\bhanu\\\\Desktop\\\\Escrow_AI_backend\\\\ | Where-Object { $_.Name -ne \"venv\" })",
+      "PowerShell(Get-ChildItem C:\\\\Users\\\\bhanu\\\\Desktop\\\\Escrow_AI_backend\\\\data\\\\ -Recurse | Where-Object { -not $_.PSIsContainer })",
+      "PowerShell(cd C:\\\\Users\\\\bhanu\\\\Desktop\\\\Escrow_AI_backend; $response = Invoke-RestMethod -Uri \"http://localhost:8000/deeds/1\" -Method GET; Write-Output \"deed_id   : $\\($response.deed_id\\)\"; Write-Output \"cached    : $\\($response.cached\\)\"; Write-Output \"buyer     : $\\($response.extracted_fields.buyer_name\\)\"; Write-Output \"seller    : $\\($response.extracted_fields.seller_name\\)\"; Write-Output \"property  : $\\($response.extracted_fields.property_address\\)\"; Write-Output \"value AED : $\\($response.extracted_fields.property_value\\)\"; Write-Output \"deposit % : $\\($response.extracted_fields.deposit_percentage\\)\"; Write-Output \"balance % : $\\($response.extracted_fields.balance_percentage\\)\"; Write-Output \"due_date  : $\\($response.extracted_fields.due_date\\)\"; Write-Output \"rules     : $\\($response.rules.Count\\)\")",
+      "PowerShell(cd C:\\\\Users\\\\bhanu\\\\Desktop\\\\Escrow_AI_backend; $r404 = Invoke-WebRequest -Uri \"http://localhost:8000/deeds/999\" -Method GET -SkipHttpErrorCheck; Write-Output \"Status: $\\($r404.StatusCode\\)\"; $r404.Content)",
+      "PowerShell(cd C:\\\\Users\\\\bhanu\\\\Desktop\\\\Escrow_AI_backend; $cached = Invoke-RestMethod -Uri \"http://localhost:8000/extract\" -Method POST -Form @{file=Get-Item \"data/samples/Dubai_Commercial_Sale_Deed.pdf\"}; Write-Output \"deed_id: $\\($cached.deed_id\\)  cached: $\\($cached.cached\\)\")",
+      "PowerShell(cd C:\\\\Users\\\\bhanu\\\\Desktop\\\\Escrow_AI_backend; $r = curl.exe -s -X POST http://localhost:8000/extract -F \"file=@data/samples/Dubai_Commercial_Sale_Deed.pdf\" -w \"`n%{http_code}\"; Write-Output $r[-1]; \\($r[0..\\($r.Count-2\\)] -join \"\"\\) | .\\\\venv\\\\Scripts\\\\python.exe -c \"import sys,json; d=json.loads\\(sys.stdin.buffer.read\\(\\)\\); print\\('deed_id:', d['deed_id'], '  cached:', d['cached']\\)\")",
+      "PowerShell(Get-Item C:\\\\Users\\\\bhanu\\\\Desktop\\\\Escrow_AI_backend\\\\dubai_deed_response.json | Select-Object Name, @{N='Size_KB';E={[math]::Round\\($_.Length/1KB,1\\)}})",
+      "PowerShell($f = Get-Item \"C:\\\\Users\\\\bhanu\\\\Desktop\\\\Escrow_AI_backend\\\\dubai_deed_response.json\"; Write-Output \"$\\($f.Name\\)  —  $\\([math]::Round\\($f.Length/1KB, 1\\)\\) KB\")",
+      "PowerShell(Get-ChildItem C:\\\\Users\\\\bhanu\\\\Desktop\\\\Escrow_AI_backend\\\\ | Where-Object { $_.Name -ne \"venv\" } | Select-Object Name, Mode)"
+    ]
+  }
+}

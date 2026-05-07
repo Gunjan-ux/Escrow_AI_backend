@@ -4,7 +4,7 @@ from functools import lru_cache
 from agno.agent import Agent
 
 from agents.model import build_model
-from config import PROMPTS_DIR
+from config import AGENT_USE_BEDROCK, PROMPTS_DIR
 from schemas import ExtractedFields
 
 logger = logging.getLogger(__name__)
@@ -18,12 +18,14 @@ def _system_prompt() -> str:
 @lru_cache(maxsize=1)
 def _agent() -> Agent:
     logger.info("[extractor] Initializing extraction agent.")
-    return Agent(
+    kwargs = dict(
         model=build_model(),
         description=_system_prompt(),
-        output_schema=ExtractedFields,
         use_json_mode=True,
     )
+    if not AGENT_USE_BEDROCK:
+        kwargs["output_schema"] = ExtractedFields
+    return Agent(**kwargs)
 
 
 def extract_fields(raw_text: str) -> ExtractedFields:
