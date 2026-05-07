@@ -1,8 +1,67 @@
-.venv/
-__pycache__/
-*.pyc
+# Environment
 .env
+.env.*
+!.env.example
+
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Distribution / build
+dist/
+build/
+*.egg-info/
+*.egg
+.eggs/
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+.pytype/
+
+# Test & coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Uploads (runtime files — keep the placeholder)
 data/uploads/*
 !data/uploads/.gitkeep
-.pytest_cache/
-.ipynb_checkpoints/
+
+# Database (SQLite — auto-created at runtime)
+*.db
+*.sqlite3
+
+# Secrets & keys
+*.pem
+*.key
+*.cert
+*.p12
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
